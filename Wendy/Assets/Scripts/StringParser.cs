@@ -115,29 +115,29 @@ public class StringParser : MonoBehaviour {
 
 	void GenerateRandomColors()
 	{
-		float newRed, newGreen, newBlue;
+		float newRed, newGreen, newBlue; // declare new RGB variables
 		
 
 		for (int i = 0; i < 26; i++)
 		{
-
+			// Randomize a new float between 0 and 1 for each color
 			newRed = UnityEngine.Random.Range(0f, 1f);
 			newGreen = UnityEngine.Random.Range(0f, 1f);
 			newBlue = UnityEngine.Random.Range(0f, 1f);
 
-			Color newColor = new Color(newRed, newGreen, newBlue, 1.0f);
+			Color newColor = new Color(newRed, newGreen, newBlue, 1.0f); // create new color
 
 			while (!IsThresholdSafe(newColor))
 			{
-
+				// If the color is too similar to 
 				newRed = UnityEngine.Random.Range(0f, 1f);
 				newGreen = UnityEngine.Random.Range(0f, 1f);
 				newBlue = UnityEngine.Random.Range(0f, 1f);
 
-				newColor = new Color(newRed, newGreen, newBlue, 1.0f);
+				newColor = new Color(newRed, newGreen, newBlue, 1.0f); // reassign color
 			}
 
-			randomColors.Add(newColor);
+			randomColors.Add(newColor); // push new color onto the list
 		}
 		
 	}
