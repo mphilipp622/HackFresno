@@ -8,6 +8,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 
 using UnityEngine;
 using Vuforia;
+using UnityEngine.UI;
 
 /// <summary>
 ///     A custom handler that implements the ITrackableEventHandler interface.
@@ -20,11 +21,17 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
 	#endregion // PRIVATE_MEMBER_VARIABLES
 
+	public Text text;
+
+	[SerializeField]
+	StringParser parser;
+
     #region UNTIY_MONOBEHAVIOUR_METHODS
 
     protected virtual void Start()
     {
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
+
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
     }
@@ -38,6 +45,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
     ///     tracking state changes.
     /// </summary>
     public void OnTrackableStateChanged(
+
         TrackableBehaviour.Status previousStatus,
         TrackableBehaviour.Status newStatus)
     {
@@ -45,13 +53,14 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
             newStatus == TrackableBehaviour.Status.TRACKED ||
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+			parser.AddWord(mTrackableBehaviour.TrackableName, mTrackableBehaviour.transform.position);
+            //Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
             OnTrackingFound();
         }
         else if (previousStatus == TrackableBehaviour.Status.TRACKED &&
                  newStatus == TrackableBehaviour.Status.NOT_FOUND)
         {
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            //Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
             OnTrackingLost();
         }
         else
@@ -69,7 +78,6 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
 
     protected virtual void OnTrackingFound()
     {
-
         var rendererComponents = GetComponentsInChildren<Renderer>(true);
         var colliderComponents = GetComponentsInChildren<Collider>(true);
         var canvasComponents = GetComponentsInChildren<Canvas>(true);
