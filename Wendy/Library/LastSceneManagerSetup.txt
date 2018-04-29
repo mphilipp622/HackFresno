@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/MainScene.unity
+- path: C:/Users/Seapanda/Documents/College/MIPS_Simulator/MipsSim/Assets/MainScene.unity
   isLoaded: 1
   isActive: 1

@@ -116,7 +116,8 @@ public class StringParser : MonoBehaviour {
 	void GenerateRandomColors()
 	{
 		float newRed, newGreen, newBlue; // declare new RGB variables
-		
+
+		UnityEngine.Random.InitState((int)Time.time);
 
 		for (int i = 0; i < 26; i++)
 		{
