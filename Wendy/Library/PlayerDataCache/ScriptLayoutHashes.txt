@@ -213,7 +213,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.XR.WSA.Spa
 9de3a22eca9aefadba2d10d5987cefe3 UnityEngine.SpatialTracking.dll:UnityEngine.SpatialTracking.TrackedPoseDriver
 58bac095e95c8e88c7883f36d9fe8ad9 Assembly-CSharp.dll:.Scanner
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ColoredText
-a6b50e309c8a9aa2475ebca7bd7a7e35 Assembly-CSharp.dll:.StringParser
+7450306a392c9076c9cf85d448e45044 Assembly-CSharp.dll:.StringParser
 26215f135eeb48d8fa1189498c107f6c Vuforia.UnityExtensions.dll:Vuforia.AnchorBehaviour
 0561521e336e270e6e5a9c61387cb838 Vuforia.UnityExtensions.dll:Vuforia.AnchorInputListenerBehaviour
 2e0fd93f459db951da0e2e94e2e33fb7 Vuforia.UnityExtensions.dll:Vuforia.AnchorStageBehaviour
