@@ -10,11 +10,15 @@ public class StringParser : MonoBehaviour {
 	private Dictionary<string, Vector3> wordPositions;
 	private Dictionary<char, string> characterColors;
 	private List<Color> randomColors;
+	List<Color> pastels;
 
 	private List<string> words;
 
 	[SerializeField]
 	Text textWindow;
+
+	[SerializeField]
+	Image background;
 
 	void Start ()
 	{
@@ -22,7 +26,9 @@ public class StringParser : MonoBehaviour {
 		wordPositions = new Dictionary<string, Vector3>();
 		randomColors = new List<Color>();
 		characterColors = new Dictionary<char, string>();
+		pastels = new List<Color>();
 
+		InitPastels();
 		GenerateRandomColors();
 		SetColors();
 	}
@@ -50,7 +56,7 @@ public class StringParser : MonoBehaviour {
 	public void DisplayText()
 	{
 		OrganizeWords();
-
+		
 		string output = null;
 		foreach (string word in words)
 		{
@@ -114,7 +120,6 @@ public class StringParser : MonoBehaviour {
 
 		for (int i = 0; i < 26; i++)
 		{
-			UnityEngine.Random.InitState(i);
 
 			newRed = UnityEngine.Random.Range(0f, 1f);
 			newGreen = UnityEngine.Random.Range(0f, 1f);
@@ -124,7 +129,7 @@ public class StringParser : MonoBehaviour {
 
 			while (!IsThresholdSafe(newColor))
 			{
-				//Debug.Log("NOT SAFE");
+
 				newRed = UnityEngine.Random.Range(0f, 1f);
 				newGreen = UnityEngine.Random.Range(0f, 1f);
 				newBlue = UnityEngine.Random.Range(0f, 1f);
@@ -140,7 +145,7 @@ public class StringParser : MonoBehaviour {
 	bool IsThresholdSafe(Color newColor)
 	{
 		// Checks if the new color is too close in RGB value to any other color in the dictionary of colors
-		float threshold = 0.1f;
+		float threshold = 0.5f;
 
 		foreach (Color randomColor in randomColors)
 		{
@@ -155,5 +160,41 @@ public class StringParser : MonoBehaviour {
 		}
 
 		return true;
+	}
+
+	private Color GetNewColor(int r, int g, int b)
+	{
+		return new Color(r / 255f, g / 255f, b / 255f, 1.0f);
+	}
+
+	void InitPastels()
+	{
+		pastels.Add(GetNewColor(230, 230, 250));
+		pastels.Add(GetNewColor(255, 240, 245));
+		pastels.Add(GetNewColor(255, 228, 225));
+		pastels.Add(GetNewColor(240, 255, 240));
+		pastels.Add(GetNewColor(255, 250, 205));
+		pastels.Add(GetNewColor(255, 222, 173));
+		pastels.Add(GetNewColor(255, 239, 213));
+
+		background.color = pastels[UnityEngine.Random.Range(0, pastels.Count - 1)]; // randomize initial background color
+	}
+
+	public void SwapBackgroundColor()
+	{
+		background.color = pastels[UnityEngine.Random.Range(0, pastels.Count - 1)];
+	}
+
+	public void SwapFontColor()
+	{
+		// swaps to a new color theme
+		randomColors.Clear();
+		characterColors.Clear();
+
+		textWindow.text = "";
+		GenerateRandomColors();
+		SetColors();
+
+		DisplayText();
 	}
 }
